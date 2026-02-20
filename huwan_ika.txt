@@ -1,0 +1,75 @@
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local VirtualUser = game:GetService("VirtualUser")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local player = Players.LocalPlayer
+
+repeat task.wait() until player.Character
+repeat task.wait() until player.Character:FindFirstChild("HumanoidRootPart")
+
+pcall(function()
+    game.CoreGui:FindFirstChild("ChiiHauu"):Destroy()
+end)
+
+
+local gui = Instance.new("ScreenGui",game.CoreGui)
+gui.Name = "ChiiHauu"
+
+local open = Instance.new("TextButton",gui)
+open.Size = UDim2.new(0,60,0,60)
+open.Position = UDim2.new(0.05,0,0.4,0)
+open.Text = "☰"
+open.BackgroundColor3 = Color3.fromRGB(20,20,20)
+open.TextColor3 = Color3.new(1,1,1)
+open.TextScaled = true
+Instance.new("UICorner",open).CornerRadius = UDim.new(1,0)
+
+local frame = Instance.new("Frame",gui)
+frame.Size = UDim2.new(0,320,0,320)
+frame.Position = UDim2.new(0.35,0,0.3,0)
+frame.BackgroundColor3 = Color3.fromRGB(15,15,15)
+frame.Visible = false
+Instance.new("UICorner",frame).CornerRadius = UDim.new(0,15)
+
+local title = Instance.new("TextLabel",frame)
+title.Size = UDim2.new(1,0,0,50)
+title.BackgroundTransparency = 1
+title.Text = "CHII HAUU HUB ALL SEA"
+title.TextColor3 = Color3.new(1,1,1)
+title.TextScaled = true
+title.Font = Enum.Font.GothamBold
+
+local function toggle(name,pos)
+    local b = Instance.new("TextButton",frame)
+    b.Size = UDim2.new(0.85,0,0,40)
+    b.Position = UDim2.new(0.075,0,pos,0)
+    b.Text = name.." : OFF"
+    b.BackgroundColor3 = Color3.fromRGB(35,35,35)
+    b.TextColor3 = Color3.new(1,1,1)
+    b.TextScaled = true
+    Instance.new("UICorner",b).CornerRadius = UDim.new(0,10)
+    return b
+end
+
+local farmBtn = toggle("Auto Farm",0.2)
+local fastBtn = toggle("Fast Attack",0.38)
+local bringBtn = toggle("Gom Quái",0.56)
+local questBtn = toggle("Auto Quest",0.74)
+
+local AutoFarm,FastAttack,BringMob,AutoQuest = false,false,false,false
+
+farmBtn.MouseButton1Click:Connect(function()
+    AutoFarm = not AutoFarm
+    farmBtn.Text = "Auto Farm : "..(AutoFarm and "ON" or "OFF")
+    farmBtn.BackgroundColor3 = AutoFarm and Color3.fromRGB(0,170,0) or Color3.fromRGB(35,35,35)
+end)
+
+fastBtn.MouseButton1Click:Connect(function()
+    FastAttack = not FastAttack
+    fastBtn.Text = "Fast Attack : "..(FastAttack and "ON" or "OFF")
+    fastBtn.BackgroundColor3 = FastAttack and Color3.fromRGB(0,170,0) or Color3.fromRGB(35,35,35)
+end)
+
+bringBtn.MouseButton1Click:Connect(function()
